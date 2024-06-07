@@ -11,7 +11,6 @@ routerAdmin
 .post('/login', storeController.processLogin);
 
 routerAdmin
-.get('/signup', storeController.getSignup)
 .post('/signup', storeController.processSignup);
 
 /* Product */
