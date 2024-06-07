@@ -6,6 +6,7 @@ const storeController : T = {};
 
 storeController.goHome = (req: Request, res: Response) => {
     try{
+        console.log("Go home");
         res.send("Home Page");
     } catch(err){
         console.log("Error, goHome", err);
@@ -14,6 +15,7 @@ storeController.goHome = (req: Request, res: Response) => {
 
 storeController.getLogin = (req: Request, res: Response) => {
     try{
+        console.log("Go Login");
         res.send("Login Page");
     } catch(err){
         console.log("Error, getLogin", err);
@@ -22,6 +24,7 @@ storeController.getLogin = (req: Request, res: Response) => {
 
 storeController.getSignup = (req: Request, res: Response) => {
     try{
+        console.log("Go Signup");
         res.send("Signup Page");
     } catch(err){
         console.log("Error, getSignup", err);
