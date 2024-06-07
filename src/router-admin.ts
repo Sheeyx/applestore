@@ -3,10 +3,18 @@ const routerAdmin = express.Router();
 import storeController from './controllers/store.controller';
 
 
+/* Stores */
 routerAdmin.get('/', storeController.goHome);
 
-routerAdmin.get('/login', storeController.getLogin);
+routerAdmin
+.get('/login', storeController.getLogin)
+.post('/login', storeController.processLogin);
 
-routerAdmin.get('/signup', storeController.getSignup);
+routerAdmin
+.get('/signup', storeController.getSignup)
+.post('/signup', storeController.processSignup);
+
+/* Product */
+/* User */
 
 export default routerAdmin;
