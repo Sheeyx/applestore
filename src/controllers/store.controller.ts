@@ -54,6 +54,7 @@ storeController.processSignup = async (req: Request, res: Response) => {
         const result = await memberService.processSignup(newMember);
         res.send(result);
     } catch(err){
+        res.send(err);
         console.log("Error, processSignup", err);
     }
 }
