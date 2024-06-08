@@ -22,8 +22,8 @@ storeController.getLogin =(req: Request, res: Response) => {
         console.log("Go Login");
 
         // TODO: SESSIONS
+        res.render("login");
 
-        res.render("signup");    
     } catch(err){
         console.log("Error, getLogin", err);
     }
@@ -34,7 +34,7 @@ storeController.getSignup = (req: Request, res: Response) => {
         console.log("Go Signup");
 
         // TODO: SESSIONS
-        res.render("login");
+        res.render("signup");    
     } catch(err){
         console.log("Error, getSignup", err);
     }
