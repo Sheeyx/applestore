@@ -22,6 +22,5 @@ app.set('view engine', "ejs");
 
 /** 4-ROUTERS */
 app.use('/admin', routerAdmin); //EJS
-// app.use('/', router);           //SPA
-
+app.use('/', router);           //SPA
 export default app;  

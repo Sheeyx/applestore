@@ -6,6 +6,7 @@ import { MemberType } from '../libs/enums/member.enum';
 
 
 const storeController : T = {};
+const memberService = new MemberService();
 
 storeController.goHome = (req: Request, res: Response) => {
     try{
@@ -19,6 +20,9 @@ storeController.goHome = (req: Request, res: Response) => {
 storeController.getLogin =(req: Request, res: Response) => {
     try{
         console.log("Go Login");
+
+        // TODO: SESSIONS
+
         res.send("Done");
     } catch(err){
         console.log("Error, getLogin", err);
@@ -28,18 +32,28 @@ storeController.getLogin =(req: Request, res: Response) => {
 storeController.getSignup = (req: Request, res: Response) => {
     try{
         console.log("Go Signup");
+
+        // TODO: SESSIONS
+
         res.send("Signup Page");
     } catch(err){
         console.log("Error, getSignup", err);
     }
 }
 
-storeController.processLogin = (req: Request, res: Response) => {
+storeController.processSignup = async (req: Request, res: Response) => {
     try{
-        console.log("processLogin");
-        res.send("Done");
+        console.log("processSignup");
+        console.log("body: ",req.body);
+
+        const newMember: MemberInput = req.body;
+        newMember.memberType = MemberType.RESTAURANT;
+
+        const result = await memberService.processSignup(newMember);
+        res.send(result);
     } catch(err){
-        console.log("Error, processLogin", err);
+        res.send(err);
+        console.log("Error, processSignup", err);
     }
 }
 
