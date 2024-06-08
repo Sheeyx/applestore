@@ -11,7 +11,7 @@ const memberService = new MemberService();
 storeController.goHome = (req: Request, res: Response) => {
     try{
         console.log("Go home");
-        res.send("Home Page");
+        res.render("home");    
     } catch(err){
         console.log("Error, goHome", err);
     }
@@ -23,7 +23,7 @@ storeController.getLogin =(req: Request, res: Response) => {
 
         // TODO: SESSIONS
 
-        res.send("Done");
+        res.render("signup");    
     } catch(err){
         console.log("Error, getLogin", err);
     }
@@ -34,8 +34,7 @@ storeController.getSignup = (req: Request, res: Response) => {
         console.log("Go Signup");
 
         // TODO: SESSIONS
-
-        res.send("Signup Page");
+        res.render("login");
     } catch(err){
         console.log("Error, getSignup", err);
     }
