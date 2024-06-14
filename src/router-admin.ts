@@ -12,6 +12,7 @@ routerAdmin
 
 routerAdmin
 .post('/signup', storeController.processSignup);
+routerAdmin.get('/check-me', storeController.checkAuthSession);
 
 /* Product */
 /* User */

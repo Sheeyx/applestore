@@ -3,6 +3,7 @@ import {T} from "../libs/types/common";
 import MemberService from '../models/Member.service';
 import { MemberInput, LoginInput, AdminRequest } from '../libs/types/member';
 import { MemberType } from '../libs/enums/member.enum';
+import Errors, { Message } from '../libs/Errors';
 
 
 const storeController : T = {};
@@ -56,23 +57,29 @@ storeController.processSignup = async (req: Request, res: Response) => {
     }
 }
 
-storeController.processLogin = async(req: AdminRequest, res: Response) => {
+storeController.processLogin = async (
+    req: AdminRequest,
+    res: Response
+  ) => {
     try {
-        console.log("processLogin");
-        console.log("body:", req.body);
-        const input: LoginInput = req.body;
-    
-        const memberService = new MemberService();
-        const result = await memberService.processLogin(input);
-        req.body.member = result;
-        req.session.save(function(){
-            res.send(result);
-        });
-      } catch (err) {
-        console.log("Error, on Login Page", err);
-        res.send(err);
-      }
-}
+      console.log("processLogin");
+      const input: LoginInput = req.body;
+
+      const result = await memberService.processLogin(input);
+
+      req.session.member = result;
+      req.session.save(function () {
+        res.send(result);
+      });
+    } catch (err) {
+      console.log("Error, on Login Page", err);
+      const message =
+        err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+      res.send(
+        `<script>alert(${message}); window.location.replace('admin/login')<script>`
+      );
+    }
+  };
 
 storeController.processSignup = async (req: AdminRequest, res: Response) => {
     try{
@@ -92,5 +99,20 @@ storeController.processSignup = async (req: AdminRequest, res: Response) => {
         console.log("Error, processSignup", err);
     }
 }
+
+storeController.checkAuthSession = async (
+    req: AdminRequest,
+    res: Response
+  ) => {
+    try {
+      console.log("checkAuthSession");
+      if (req.session?.member)
+        res.send(` <script>alert("Hi ${req.session.member.memberNick}")<script>`);
+      else res.send(`<script>alert("${Message.NOT_AUTHENTIFICATED}")<script>`);
+    } catch (err) {
+      console.log("Error, on Login Page", err);
+      res.send(err);
+    }
+  };
 
 export default storeController;
