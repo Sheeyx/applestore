@@ -17,10 +17,18 @@ routerAdmin.get('/check-me', storeController.checkAuthSession);
 routerAdmin.get('/logout', storeController.logout);
 
 /* Product */
-routerAdmin
-    .get('/product/all', productController.getAllProducts)
-    .post('/product/create', productController.createNewProduct)
-    .post('/product/:id', productController.updateChosenProduct);
+routerAdmin.
+    get(
+    '/product/all', 
+    productController.verifyRestaurant,
+    productController.getAllProducts
+    )
+    .post('/product/create', 
+    productController.verifyRestaurant,
+    productController.createNewProduct)
+    .post('/product/:id', 
+    productController.createNewProduct,
+    productController.updateChosenProduct);
 
 /* User */
 
