@@ -54,7 +54,7 @@ storeController.processSignup = async (
     
         const newMember: MemberInput = req.body;
         newMember.memberImage = file?.path; 
-        newMember.memberType = MemberType.RESTAURANT;
+        newMember.memberType = MemberType.STORE;
         const result = await memberService.processSignup(newMember);
 
         req.session.member = result;
@@ -133,9 +133,7 @@ storeController.processLogin = async (
     res: Response,
     next: NextFunction
   ) => {
-      if(req.session?.member?.memberType === MemberType.RESTAURANT){
-        console.log("hello");
-        
+    if(req.session?.member?.memberType === MemberType.STORE){        
         req.member = req.session.member;
         next();
       } else {

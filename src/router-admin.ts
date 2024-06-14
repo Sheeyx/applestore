@@ -27,13 +27,15 @@ routerAdmin.get('/logout', storeController.logout);
 routerAdmin.
     get(
     '/product/all', 
-    productController.verifyRestaurant,
+    storeController.verifyRestaurant,
     productController.getAllProducts
     )
-    .post('/product/create', 
-    productController.verifyRestaurant,
-    makeUploader("products").array('productImages',5),
-    productController.createNewProduct)
+    .post(
+        "/product/create",
+        storeController.verifyRestaurant,
+        makeUploader("products").array("productImages",5),
+        productController.createNewProduct
+      )
     .post('/product/:id', 
     productController.createNewProduct,
     productController.updateChosenProduct);
