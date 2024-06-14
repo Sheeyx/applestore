@@ -110,9 +110,25 @@ storeController.checkAuthSession = async (
         res.send(` <script>alert("Hi ${req.session.member.memberNick}")<script>`);
       else res.send(`<script>alert("${Message.NOT_AUTHENTIFICATED}")<script>`);
     } catch (err) {
-      console.log("Error, on Login Page", err);
-      res.send(err);
-    }
-  };
+        console.log("Error, checkAuthSession", err);
+        res.send(err);
+      }
+    };
+
+    storeController.logout = async (
+        req: AdminRequest,
+        res: Response
+      ) => {
+        try {
+          console.log("logout");
+          req.session.destroy(function(){
+            res.redirect("/admin")
+          });
+    
+        } catch (err) {
+          console.log("Error, on logout", err);
+          res.send(err);
+        }
+      };
 
 export default storeController;

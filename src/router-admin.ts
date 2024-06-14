@@ -13,6 +13,7 @@ routerAdmin
 routerAdmin
 .post('/signup', storeController.processSignup);
 routerAdmin.get('/check-me', storeController.checkAuthSession);
+routerAdmin.get('/logout', storeController.logout);
 
 /* Product */
 /* User */
