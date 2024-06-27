@@ -4,6 +4,10 @@
     <div>
         <div>Product page</div>
         <div><%=member.memberNick%></div>
+        <!-- Control flow -->
+        <% products.map(function(value,key){ %>
+            <p><%=value.productName%> - <%=value.productSize%></p>
+        <%})%>
     </div>
 </body>
 <%- include('includes/footer') %>
