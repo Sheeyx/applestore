@@ -147,14 +147,14 @@ storeController.processLogin = async (
     res: Response
   ) => {
     try {
-      console.log("getUsers");
-      req.session.destroy(function(){
-        res.redirect("/admin")
-      });
+      console.log("updateChosenUsers");
+      const result = await memberService.updateChosenUser(req.body);
+      res.status(HttpCode.OK).json({data: result});
 
     } catch (err) {
-      console.log("Error, getUsers", err);
-      res.send(err);
+      console.log("Error, updateChosenUsers", err);
+      if(err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standard.code).json(Errors.standard);
     }
   };
 

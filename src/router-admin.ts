@@ -46,8 +46,13 @@ routerAdmin.
     );
 
 /* User */
-routerAdmin.get("/user/all", 
-storeController.verifyRestaurant,
-storeController.getUsers)
+
+routerAdmin
+  .get("/user/all", 
+  storeController.verifyRestaurant,
+  storeController.getUsers)
+  .post("/user/edit",
+  storeController.verifyRestaurant,
+  storeController.updateChosenUsers)
 
 export default routerAdmin;
