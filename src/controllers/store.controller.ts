@@ -128,6 +128,36 @@ storeController.processLogin = async (
     }
   };
 
+  storeController.getUsers = async (
+    req: AdminRequest,
+    res: Response
+  ) => {
+    try {
+      console.log("getUsers");
+      const result = await memberService.getUsers();
+      res.render("users", {users: result});
+    } catch (err) {
+      console.log("Error, getUsers", err);
+      res.redirect("/admin/login");
+    }
+  };
+
+  storeController.updateChosenUsers = async (
+    req: AdminRequest,
+    res: Response
+  ) => {
+    try {
+      console.log("getUsers");
+      req.session.destroy(function(){
+        res.redirect("/admin")
+      });
+
+    } catch (err) {
+      console.log("Error, getUsers", err);
+      res.send(err);
+    }
+  };
+
   storeController.verifyRestaurant = (
     req: AdminRequest,
     res: Response,
