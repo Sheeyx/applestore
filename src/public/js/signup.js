@@ -4,6 +4,8 @@ $(function () {
     const fileTarget = $(".file-box .upload-hidden");
   
     let filename;
+
+    console.log($(".member-image").get(0));
   
     fileTarget.on("change", function () {
       if (window.FileReader) {
@@ -42,6 +44,7 @@ function validateSignupForm(){
         alert("Please differs, please check");
         return false
     }
+
 
     const memberImage = $(".member-image").get(0).files[0].name
     ? $(".member-image").get(0).files[0].name
