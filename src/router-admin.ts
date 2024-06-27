@@ -38,8 +38,12 @@ routerAdmin.
       )
     .post('/product/:id', 
     productController.createNewProduct,
-    productController.updateChosenProduct);
-
+    productController.updateChosenProduct)
+    .post(
+      "/product/:id",
+      storeController.verifyRestaurant,
+      productController.updateChosenProduct
+    );
 /* User */
 
 export default routerAdmin;

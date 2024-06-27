@@ -8,10 +8,14 @@ import { ProductInput } from '../libs/types/product';
 const productController:T = {}
 const productService = new ProductService();
 
+//SPA
+//SSR
+
 // GET-ALL
 productController.getAllProducts = async (req: Request, res: Response)=>{
     try {
         console.log("getAllProducts");
+        
         res.render("product")
     } catch(err) {
         console.log("Error, getAllProducts", err);
@@ -24,7 +28,6 @@ productController.getAllProducts = async (req: Request, res: Response)=>{
 productController.createNewProduct = async (req: AdminRequest, res: Response) => {
     try {
       console.log("createNewProduct");
-      console.log("req.files",req.files);
       
       if(!req.files?.length) 
         throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED)
@@ -55,9 +58,15 @@ productController.createNewProduct = async (req: AdminRequest, res: Response) =>
 // UPDATE
 productController.updateChosenProduct = async (req: Request, res: Response)=>{
     try {
-        console.log("getAllProducts");
+        console.log("updateChosenProduct");
+        const id = req.params.id;
+
+        const result = await productService.updateChosenProduct(id, req.body);
+
+        res.status(HttpCode.OK).json({data: result});
+        
     } catch(err) {
-        console.log("Error, getAllProducts", err);
+        console.log("Error, updateChosenProduct", err);
         if(err instanceof Errors) res.status(err.code).json(err);
         else res.status(Errors.standard.code).json(Errors.standard);
     }
