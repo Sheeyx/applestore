@@ -10,14 +10,13 @@ class MemberService {
     constructor(){
         this.memberModel = MemberModel;
     }
-
     // SPA
 
     public async signup(input: MemberInput):Promise<any>{
 
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
-
+            
         try {
             const result = await this.memberModel.create(input);
             result.memberPassword = "";
@@ -45,15 +44,15 @@ class MemberService {
               }
 
             return await this.memberModel.findById(member._id).lean().exec();
-
+           
     }
 
     // SSR
 
     public async processSignup(input: MemberInput):Promise<any>{
-        // const exist = await this.memberModel.findOne({memberType: MemberType.RESTAURANT}).exec();
+        const exist = await this.memberModel.findOne({memberType: MemberType.STORE}).exec();
         
-        // if(exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+        if(exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
 
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
@@ -84,7 +83,16 @@ class MemberService {
                 throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
               }
 
-            return await this.memberModel.findById(member._id).exec();      
+            return await this.memberModel.findById(member._id).exec();
+           
+    }
+
+    public async getUsers():Promise<any[]>{
+       const result = await this.memberModel.find({member: MemberType.USER}).exec();
+
+       if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+       return result;
     }
 
     public async updateChosenUser(input: MemberUpdateInput):Promise<any>{
@@ -92,19 +100,11 @@ class MemberService {
         const result = 
         await this.memberModel
         .findByIdAndUpdate({_id: input._id}, input, {new: true}).exec();
-
-        if(!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
-
-        return result;
-     }
-
-    public async getUsers():Promise<any[]>{
-        const result = await this.memberModel.find({member: MemberType.USER}).exec();
  
-        if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+        if(!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
  
         return result;
      }
 }
 
-export default MemberService;
+export default MemberService;   
