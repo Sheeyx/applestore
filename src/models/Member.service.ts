@@ -31,6 +31,19 @@ class MemberService {
         return result;
     }
 
+    public async getTopUsers():Promise<any[]>{
+        const result = await this.memberModel
+        .find({
+            memberStatus: MemberStatus.ACTIVE, 
+            memberPoints: {$gte: 1}
+        })
+        .sort({memberPoints: -1})
+        .limit(4)
+        .exec();
+
+        return result;
+    }
+
     public async signup(input: MemberInput):Promise<any>{
 
         const salt = await bcrypt.genSalt();
