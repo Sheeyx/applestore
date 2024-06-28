@@ -12,6 +12,18 @@ class MemberService {
     }
     // SPA
 
+    public async getMemberDetail(member: Member): Promise<any>{
+        const memberId = shapeIntoMongooseObjectId(member._id);
+        const result = await this.memberModel.findOne({
+            _id: memberId, 
+            memberStatus: MemberStatus.ACTIVE
+        }).exec();
+
+        if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+        return result;
+    }
+
     public async signup(input: MemberInput):Promise<any>{
 
         const salt = await bcrypt.genSalt();
