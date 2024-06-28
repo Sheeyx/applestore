@@ -35,6 +35,7 @@ class ProductService {
                 {$match: match},
                 {$sort: sort},
                 {$skip: (inquire.page * 1 - 1) * inquire.limit},
+                {$limit: inquire.limit * 1},
             ]).exec();
 
             if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
