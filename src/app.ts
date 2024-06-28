@@ -3,6 +3,7 @@ import path from "path";
 import router from "./router";
 import routerAdmin from "./router-admin";
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import { MORGAN_FORMAT } from "./libs/config";
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -20,6 +21,7 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(morgan(MORGAN_FORMAT));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 /** 2-SESSIONS */
