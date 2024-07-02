@@ -18,14 +18,18 @@ router.get("/product/all", productController.getProducts);
 router.get("/product/:id",memberController.retrieveAuth, productController.getProduct);
 
 /*** Order ***/
+
 router.post("/order/create", 
 memberController.verifyAuth, 
 orderController.createOrder);
 
 router.get("/order/all", 
 memberController.verifyAuth, 
-orderController.getMyOrders)
+orderController.getMyOrders);
 
+router.post("/order/update", 
+memberController.verifyAuth, 
+orderController.updateOrder);
 
 
 export default router;
