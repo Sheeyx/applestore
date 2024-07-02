@@ -34,9 +34,13 @@ export interface ProductUpdateInput {
     productLeftCount?: number;
     productLeftSize?: ProductSize;
     productLeftVolume?: number; 
+    productSize: ProductSize;
+    productVolume: number; 
     productDesc?: string;
     productImages?: string[];
     productViews?: number;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface ProductInquire {
