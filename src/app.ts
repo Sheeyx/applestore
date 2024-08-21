@@ -9,6 +9,8 @@ import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
 import cors from "cors";
+import {Server as Socket} from "socket.io";
+import http from "http";
 
 const MongoDBStore = ConnectMongoDB(session);
 
@@ -53,4 +55,25 @@ app.set('view engine', "ejs");
 /** 4-ROUTERS */
 app.use('/admin', routerAdmin); //EJS
 app.use('/', router);           //SPA
-export default app;  
+
+const server = http.createServer(app);
+const io = new Socket(server, {
+    cors: {
+        origin: true,
+        credentials: true
+    },
+});
+
+let summaryClient = 0;
+io.on("connection", (socket) => {
+    summaryClient++;
+    console.log("Connection & total ", summaryClient);
+    
+    socket.on("disconnect", () => {
+        summaryClient--;
+        console.log("Disconnect & total", summaryClient);
+        
+    })
+})
+
+export default server;  
