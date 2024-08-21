@@ -31,13 +31,13 @@ class MemberService {
         return result;
     }
 
-    public async getTopUsers():Promise<any[]>{
+    public async getTopUsers():Promise<any>{
         const result = await this.memberModel
         .find({
             memberStatus: MemberStatus.ACTIVE, 
-            memberPoints: {$gte: 1}
+            memberPoint: {$gte: 1}
         })
-        .sort({memberPoints: -1})
+        .sort({memberPoint: -1})
         .limit(4)
         .exec();
 
@@ -129,13 +129,13 @@ class MemberService {
            
     }
 
-    public async getUsers():Promise<any[]>{
-       const result = await this.memberModel.find({member: MemberType.USER}).exec();
-
-       if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-
-       return result;
-    }
+    public async getUsers():Promise<any>{
+        const result = await this.memberModel.find().exec();
+ 
+        if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+ 
+        return result;
+     }
 
     public async updateChosenUser(input: MemberUpdateInput):Promise<any>{
         input._id = shapeIntoMongooseObjectId(input._id);

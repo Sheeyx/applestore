@@ -44,6 +44,7 @@ export interface ProductUpdateInput {
 }
 
 export interface ProductInquire {
+    productCollection: import("/Users/sheyx/Desktop/course/applestore/src/libs/enums/products.enum").ProductCollection;
     order: string;
     page: number;
     limit: number;

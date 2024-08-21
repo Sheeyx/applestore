@@ -14,7 +14,7 @@ export enum ProductStorage {
    ONE_TB = 1024
 }
 
-export enum ProductCategory {
+export enum ProductCollection {
    IPHONE = "IPHONE",
    MACBOOK = "MACBOOK",
    IPAD = "IPAD",

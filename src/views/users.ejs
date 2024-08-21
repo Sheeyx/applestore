@@ -39,7 +39,18 @@
             </tr>
           </thead>
           <tbody>
-            <% users.forEach(function(value, index) { %>
+            <% 
+              // Mock data for users
+              const users = [
+                { _id: 1, memberNick: 'Jamshid', memberPhone: '01083939321', memberStatus: 'ACTIVE' },
+                { _id: 2, memberNick: 'Anvar', memberPhone: '01083939322', memberStatus: 'ACTIVE' },
+                { _id: 3, memberNick: 'John', memberPhone: '821010101010', memberStatus: 'ACTIVE' },
+                { _id: 4, memberNick: 'David', memberPhone: '01083939324', memberStatus: 'ACTIVE' },
+                { _id: 5, memberNick: 'Alice', memberPhone: '01083939320', memberStatus: 'BLOCK' }
+              ];
+
+              users.forEach(function(value, index) { 
+            %>
             <tr>
               <td><%= index + 1 %></td>
               <td><%= value.memberNick %></td>

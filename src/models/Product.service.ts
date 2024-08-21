@@ -24,6 +24,9 @@ class ProductService {
     public async getProducts(inquire: ProductInquire): Promise<Product[]>{
         const match: T = { productStatus: ProductStatus.PROCESS}
 
+        if(inquire.productCollection)
+            match.productCollection = inquire.productCollection;
+
         if(inquire.search)
             match.productName = ({$regex: new RegExp(inquire.search, "i")});
 

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose"; 
-import { ProductCategory, ProductSize, ProductStatus, ProductStorage } from "../libs/enums/products.enum";
+import { ProductCollection, ProductSize, ProductStatus, ProductStorage } from "../libs/enums/products.enum";
 
 const productSchema = new Schema({
     productStatus: {
@@ -8,9 +8,9 @@ const productSchema = new Schema({
         default: ProductStatus.PAUSE
     },
 
-    productCategory: {
+    productCollection: {
         type: String,
-        enum: ProductCategory,
+        enum: ProductCollection,
         required: true
     },
 
