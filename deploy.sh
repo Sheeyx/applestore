@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # PRODUCTION
 git reset --hard 
 git chekcout master

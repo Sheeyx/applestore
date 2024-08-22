@@ -1,4 +1,4 @@
-import { ProductSize, ProductStatus } from "../enums/products.enum";
+import { ProductCollection, ProductSize, ProductStatus } from "../enums/products.enum";
 import {ObjectId} from 'mongoose';
 
 export interface Product {
@@ -44,7 +44,7 @@ export interface ProductUpdateInput {
 }
 
 export interface ProductInquire {
-    productCollection: import("/Users/sheyx/Desktop/course/applestore/src/libs/enums/products.enum").ProductCollection;
+    productCollection: ProductCollection;
     order: string;
     page: number;
     limit: number;
